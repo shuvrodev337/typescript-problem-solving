@@ -2,21 +2,51 @@
 
 // After crafting the function, apply it to an array of diverse objects. Showcase the extracted 'id' and 'name' details, revealing the secrets kept within these mysterious objects.
 
-interface IUser {
-  id: number;
-  name: string;
-}
+// interface IUser {
+//   id: number;
+//   name: string;
+// }
 
-const getProperty = <T, K extends keyof T>(
+const users = [
+  {
+    id: 1,
+    name: "Shuvro",
+  },
+  {
+    id: 2,
+    name: "Dev",
+  },
+  {
+    id: 3,
+    name: "Mondal",
+  },
+];
+const getPropertyValues = <T, K extends keyof T>(
   array: T[],
   propertyName: K
 ): T[K][] => {
   return array.map((obj) => obj[propertyName]);
 };
+// console.log("The extracted values are, ", getPropertyValues(users, "name"));
 
 // Your challenge is to create a TypeScript function that turns an array of key-value pairs into a neatly organized object. Weave a function that seamlessly merges the keys and values from the array, transforming them into a structured object.
 
 // Once your function is crafted, apply it to an array filled with various key-value pairs. Witness the array's shift into a tidy and structured object, showcasing its newfound form.
+
+const myUsersArray: [string, any][] = [
+  ["id", 1],
+  ["name", "Shuvro"],
+  ["age", 23],
+];
+const makeObject = <T extends string, K>(array: [T, K][]): Record<T, K> => {
+  const newObj = array.reduce((finalObj, [key, value]) => {
+    finalObj[key] = value;
+    return finalObj;
+  }, {} as Record<T, K>);
+
+  return newObj;
+};
+console.log(makeObject(myUsersArray));
 
 // Your task is to simplify the consistency of a complex object structure using type aliases in TypeScript. Start by defining a user profile, comprising various attributes such as name, address, and email.
 
